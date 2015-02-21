@@ -1,5 +1,8 @@
 <?php
 $DiscoverIP="239.255.255.250";
+
+// Replace the following lines with the IP of your IceCast server (your RPi), and with the name of the Sonos speaker on which you'd like to hear your music
+$streamIP="192.168.1.60";
 $chosenRoom="Salon";
 //$chosenRoom="Cuisine";
 $i=0;
@@ -21,16 +24,11 @@ foreach ($instances as $instance)
 		if ($instances[$i]->GetTransportInfo()=="PLAYING"){
 		print "Volume : ". $instances[$i]->GetVolume()."\n";}
 		print "Piste : ". $instances[$i]->GetMediaInfo()."\n";
-		print "Jouons un vinyle... \n";	
-		$instances[$i]->SetQueue("x-rincon-mp3radio://192.168.1.60:8000/raspi");
+		$instances[$i]->SetQueue("x-rincon-mp3radio://".$streamIP.":8000/raspi");
 		$instances[$i]->Play();
 		$instances[$i]->SetVolume(40);
 		print "Nouvelle Piste : ". $instances[$i]->GetMediaInfo()."\n";
 	}
 	$i++;
 }
-//$sonos_1 = new SonosPHPController($IP_sonos_1); 
-//$volume = $sonos_1->GetVolume();
-//if ($volume > 50)
-//     $sonos_1 = $sonos_1->SetVolume(50);
 ?>
